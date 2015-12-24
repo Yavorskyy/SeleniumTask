@@ -8,6 +8,6 @@ class ResultPage(object):
     	self.driver.find_element_by_xpath(ResultLoc.GoogleSearchResult.format(row_number)).click()
 
     def getTextFromPage(self):
-        data_from_page = self.driver.find_elements_by_class_name('body') # all data within webpage
+        data_from_page = self.driver.find_elements_by_class_name(ResultLoc.Page) # all data within webpage
         text = [comment.text for comment in data_from_page] # all this data put into the list
         return str(text).lower()

@@ -7,12 +7,7 @@ class HomePage(object):
     
     def inputKeyword(self, param):
         self.driver.find_element_by_xpath(HomeLoc.GoogleSearchField).send_keys(param)
-        #return HomePage(self.driver)
 
     def clickSearch(self):
         self.driver.find_element_by_xpath(HomeLoc.GoogleSearchButton).click()
         return ResultPage(self.driver)
-
-
-
-

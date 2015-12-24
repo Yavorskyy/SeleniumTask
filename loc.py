@@ -4,3 +4,4 @@ class HomeLoc(object):
 
 class ResultLoc(object):
 	GoogleSearchResult = ".//*[@id='rso']/div/div[{}]/div/h3/a"
+	Page = "body"
