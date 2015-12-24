@@ -10,7 +10,7 @@ class HomePage(object):
         #return HomePage(self.driver)
 
     def clickSearch(self):
-        self.driver.find_element_by_xpath(HomeLoc.GoogleSearcButton).click()
+        self.driver.find_element_by_xpath(HomeLoc.GoogleSearchButton).click()
         return ResultPage(self.driver)
 
 
