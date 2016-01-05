@@ -1,28 +1,22 @@
 from selenium.webdriver.common.by import By
 
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from helper import HelpPage
 
 class ResultPage(object):
     GoogleSearchRow = (By.XPATH, ".//*[@id='rso']/div/div[{}]/div/h3/a")
-    GoogleSearchResult = (By.TAG_NAME, "body")
 
-    def __init__(self, driver):
+    def __init__(self, driver, wait):
         self.driver = driver
+        self.wait = wait
 
-    def getRowNumber(self, row_number):
-        RowNumber = list(ResultPage.GoogleSearchRow) #locator with result rows on google page(from GoogleSearchResults class)
-        RowNumber[1] = RowNumber[1].format(row_number) #enter needed number of row in locator xpath
-        return tuple(RowNumber)
+    def getRowNumberLocator(self, row_number):
+        RowNumberLocator = list(ResultPage.GoogleSearchRow) #locator with result rows on google page(from GoogleSearchResults class)
+        RowNumberLocator[1] = RowNumberLocator[1].format(row_number) #enter needed number of row in locator xpath
+        return tuple(RowNumberLocator)
 
-    def clickGoogleSearchResult(self, RowNumber):
-    	wait = WebDriverWait(self.driver, 10)
-        wait.until(EC.presence_of_element_located(RowNumber))  	
-        self.driver.find_element(*RowNumber).click() #click needed result row
-
-
-    def getTextFromSearchResult(self):
-        data_from_page = self.driver.find_elements(*ResultPage.GoogleSearchResult) # all data within webpage
-        text = [comment.text for comment in data_from_page] # all this data put into the list
-        return str(text).lower()
-
+    def clickGoogleSearchResult(self, RowNumberLocator):
+    	self.wait.until(EC.presence_of_element_located(RowNumberLocator))  	
+        self.driver.find_element(*RowNumberLocator).click() #click needed result row
+        return HelpPage(self.driver)

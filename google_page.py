@@ -8,17 +8,17 @@ class HomePage(object):
     GoogleSearchField = (By.XPATH, ".//*[@id='sb_ifc0']")
     GoogleSearchButton = (By.XPATH, ".//*[@id='sblsbb']")
 
-    def __init__(self, driver):
+    def __init__(self, driver, wait):
         self.driver = driver
+        self.wait = wait
     
     def inputKeyword(self, word):
-    	wait = WebDriverWait(self.driver, 10)
-        wait.until(EC.presence_of_element_located(HomePage.GoogleSearchField))
+    	self.wait.until(EC.presence_of_element_located(HomePage.GoogleSearchField))
         self.driver.find_element(*HomePage.GoogleSearchField).send_keys(word)
 
     def clickSearch(self):
         self.driver.find_element(*HomePage.GoogleSearchButton).click()
-        return ResultPage(self.driver)
+        return ResultPage(self.driver, self.wait)
 
 
 
