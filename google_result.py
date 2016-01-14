@@ -2,14 +2,12 @@ from selenium.webdriver.common.by import By
 
 from selenium.webdriver.support import expected_conditions as EC
 
-from helper import HelpPage
+from base import BasePage
 
-class ResultPage(object):
+class ResultPage(BasePage):
     GoogleSearchRow = (By.XPATH, ".//*[@id='rso']/div/div[{}]/div/h3/a")
+    GoogleSearchResult = (By.TAG_NAME, "body")
 
-    def __init__(self, driver, wait):
-        self.driver = driver
-        self.wait = wait
 
     def getRowNumberLocator(self, row_number):
         RowNumberLocator = list(ResultPage.GoogleSearchRow) #locator with result rows on google page(from GoogleSearchResults class)
@@ -19,4 +17,3 @@ class ResultPage(object):
     def clickGoogleSearchResult(self, RowNumberLocator):
     	self.wait.until(EC.presence_of_element_located(RowNumberLocator))  	
         self.driver.find_element(*RowNumberLocator).click() #click needed result row
-        return HelpPage(self.driver)
